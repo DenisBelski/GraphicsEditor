@@ -24,8 +24,8 @@ namespace GraphicsEditor
         {
             InitializeComponent();
 
-            IsDraw = false;
-            R = 1;
+			IsDraw = false;
+            R = 4;
             Color = Brushes.Red;
             rbRed.IsChecked = true;
         }
@@ -89,6 +89,25 @@ namespace GraphicsEditor
 			rColor.Fill = Color;
 		}
 
+		private void cmYellow(object sender, RoutedEventArgs e)
+		{
+			Color = Brushes.Yellow;
+			rColor.Fill = Color;
+		}
+
+		private void cmBlack(object sender, RoutedEventArgs e)
+		{
+			Color = Brushes.Black;
+			rColor.Fill = Color;
+		}
+
+		private void cmPurple(object sender, RoutedEventArgs e)
+		{
+			Color = Brushes.Purple;
+			rColor.Fill = Color;
+		}
+
+
 		private void cmSize(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
 			R = slSize.Value;
@@ -97,5 +116,6 @@ namespace GraphicsEditor
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
         }
+
     }
 }
