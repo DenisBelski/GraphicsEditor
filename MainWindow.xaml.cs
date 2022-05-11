@@ -24,98 +24,92 @@ namespace GraphicsEditor
         {
             InitializeComponent();
 
-			IsDraw = false;
-            R = 4;
-            Color = Brushes.Red;
-            rbRed.IsChecked = true;
+			brushIsDown = false;
+            brushThickness = 4;
+            currentColor = Brushes.Red;
+            fixedRedColor.IsChecked = true;
         }
 
-		Brush Color;
-		bool IsDraw;
-		double R;
+		Brush currentColor;
+		bool brushIsDown;
+		double brushThickness;
 
 		private void cmDown(object sender, MouseButtonEventArgs e)
 		{
-			IsDraw = true;
+			brushIsDown = true;
 		}
 
 		private void cmUp(object sender, MouseButtonEventArgs e)
 		{
-			IsDraw = false;
+			brushIsDown = false;
 		}
 
 		private void cmMove(object sender, MouseEventArgs e)
 		{
-			if (IsDraw)
+			if (brushIsDown)
 			{
-				if ((e.GetPosition(g).X < 0) || (e.GetPosition(g).X > g.Width))
+				if ((e.GetPosition(myCanvas).X < 0) || (e.GetPosition(myCanvas).X > myCanvas.Width))
 				{
 					return;
 				}
-				if ((e.GetPosition(g).Y < 0) || (e.GetPosition(g).Y > g.Height))
+				if ((e.GetPosition(myCanvas).Y < 0) || (e.GetPosition(myCanvas).Y > myCanvas.Height))
 				{
 					return;
 				}
 
-				Ellipse O = new Ellipse();
-				O.Width = R;
-				O.Height = R;
-				O.Fill = Color;
-				O.Margin = new Thickness(e.GetPosition(g).X - R / 2, e.GetPosition(g).Y - R / 2, 0, 0);
-				g.Children.Add(O);
+				Ellipse ellipse = new Ellipse();
+				ellipse.Width = brushThickness;
+				ellipse.Height = brushThickness;
+				ellipse.Fill = currentColor;
+				ellipse.Margin = new Thickness(e.GetPosition(myCanvas).X - brushThickness / 2, e.GetPosition(myCanvas).Y - brushThickness / 2, 0, 0);
+				myCanvas.Children.Add(ellipse);
 			}
 		}
 
 		private void cmClear(object sender, RoutedEventArgs e)
 		{
-			g.Children.Clear();
+			myCanvas.Children.Clear();
 		}
 
 		private void cmRed(object sender, RoutedEventArgs e)
 		{
-			Color = Brushes.Red;
-			rColor.Fill = Color;
+			currentColor = Brushes.Red;
+			squareColor.Fill = currentColor;
 		}
 
 		private void cmBlue(object sender, RoutedEventArgs e)
 		{
-			Color = Brushes.Blue;
-			rColor.Fill = Color;
+			currentColor = Brushes.Blue;
+			squareColor.Fill = currentColor;
 		}
 
 		private void cmGreen(object sender, RoutedEventArgs e)
 		{
-			Color = Brushes.Green;
-			rColor.Fill = Color;
+			currentColor = Brushes.Green;
+			squareColor.Fill = currentColor;
 		}
 
 		private void cmYellow(object sender, RoutedEventArgs e)
 		{
-			Color = Brushes.Yellow;
-			rColor.Fill = Color;
+			currentColor = Brushes.Yellow;
+			squareColor.Fill = currentColor;
 		}
 
 		private void cmBlack(object sender, RoutedEventArgs e)
 		{
-			Color = Brushes.Black;
-			rColor.Fill = Color;
+			currentColor = Brushes.Black;
+			squareColor.Fill = currentColor;
 		}
 
 		private void cmPurple(object sender, RoutedEventArgs e)
 		{
-			Color = Brushes.Purple;
-			rColor.Fill = Color;
+			currentColor = Brushes.Purple;
+			squareColor.Fill = currentColor;
 		}
-
 
 		private void cmSize(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
-			R = slSize.Value;
+			brushThickness = brushSize.Value;
 		}
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-        }
-
     }
 }
